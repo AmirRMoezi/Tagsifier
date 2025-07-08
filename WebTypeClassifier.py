@@ -20,14 +20,20 @@ from sklearn.cluster import KMeans
 import os
 import shutil
 import gzip
+import argparse
 
+parser = argparse.ArgumentParser(description="Classify webpages based on HTML structure")
+parser.add_argument('--clusters', type=int, default=4, help='Number of clusters to form')
+parser.add_argument('--row_start', type=int, default=1, help='Starting Excel row')
+parser.add_argument('--row_end', type=int, default=70, help='Ending Excel row')
+args = parser.parse_args()
 path2 = str(os.path.dirname(os.path.realpath(__file__))) + "\\" 
 
 # # Taking control Inputs from user
 window_size = 5       # size of sliding window for Tags
-NofClusters= 3        # Number of output clusters
-InputRowStart = 1   # row number of Input.slsx to be started from 
-InputRowEnd = 12     # row number of Input.slsx to finish at
+NofClusters= args.clusters       # Number of output clusters
+InputRowStart = args.row_start   # row number of Input.slsx to be started from 
+InputRowEnd = args.row_end     # row number of Input.slsx to finish at
 
 # # Importing test data
 print("Importing test data ...")
